@@ -342,6 +342,7 @@ footer .top{grid-template-columns:1fr;gap:34px}
 <label>FULL NAME<input name="n" required autocomplete="name"></label>
 <label>PHONE<input name="p" type="tel" required autocomplete="tel"></label>
 <label>ORDER TYPE<select name="t"><option>Delivery</option><option>Pickup</option><option>Dine-in</option></select></label>
+<label>PAYMENT METHOD<select name="pay"><option>Cash</option><option>Card on delivery / pickup</option></select></label>
 <label>ADDRESS / TABLE NOTES<textarea name="a" rows="3"></textarea></label>
 <div class="tr t" style="margin:6px 0 0"><span>Total</span><span id="coTot"></span></div>
 <button class="btn solid" type="submit">PLACE ORDER</button>
@@ -374,6 +375,30 @@ const MENU = {
 };
 const FEATURED = ["r6","r3","r1"];
 /* ============================================= */
+
+/* ===== PUSHOVER (order notifications) ===== */
+const PUSHOVER_CFG = {
+  TOKEN:"abdz178d3h7m9f5hu4fziinkh6x831",
+  USER:"uhtt5wbafn6degjfb3gs9pg72rrojk",
+  URL:"https://api.pushover.net/1/messages.json"
+};
+function newOrderId(){ return "#RZ-"+new Date().getFullYear()+"-"+String(Math.floor(Date.now()/1000)%10000).padStart(4,"0"); }
+function notifyPushover(o){
+  const message =
+"You have received a new order at ROZANA Café & Restaurant.\n\n"+
+"📦 Order ID: "+o.id+"\n"+
+"👤 Customer: "+o.name+"\n"+
+"📞 Phone: "+o.phone+"\n"+
+"🛒 Order Total: "+o.total+" EGP\n"+
+"💳 Payment Method: "+o.pay+"\n\n"+
+"Please review the order details and confirm the order with the customer.\n\n"+
+"ROZANA — A Taste of Something Special. ☕";
+  const params = {token:PUSHOVER_CFG.TOKEN,user:PUSHOVER_CFG.USER,title:"🔔 NEW ORDER RECEIVED!",message,priority:"1",sound:"cashregister"};
+  try{
+    fetch(PUSHOVER_CFG.URL,{method:"POST",mode:"no-cors",keepalive:true,headers:{"Content-Type":"application/x-www-form-urlencoded"},body:new URLSearchParams(params).toString()}).catch(e=>console.warn("Pushover failed:",e));
+  }catch(e){ console.warn("Pushover error:",e); }
+}
+/* ========================================== */
 
 const $ = (s,r=document)=>r.querySelector(s), $$ = (s,r=document)=>[...r.querySelectorAll(s)];
 const ALL = [...MENU.restaurant, ...MENU.cafe];
@@ -446,7 +471,7 @@ document.addEventListener("click",e=>{
   render();
 });
 const drawer=$("#drawer"), ov=$("#ov");
-function drawerOpen(o){ drawer.classList.toggle("on",o); ov.classList.toggle("on",o); drawer.setAttribute("aria-hidden",!o); document.body.classList.toggle("lock",o); if(!o) $("#co").classList.remove("on"); }
+function drawerOpen(o){ drawer.classList.toggle("on",o); ov.classList.toggle("on",o); drawer.setAttribute("aria-hidden",!o); document.body.classList.toggle("lock",o); if(!o){ $("#co").classList.remove("on"); const d=$("#doneBox"); if(d){ d.remove(); $("#form").style.display=""; $("#form").reset(); } } }
 $("#openCart").onclick=()=>drawerOpen(true);
 $("#closeCart").onclick=ov.onclick=()=>drawerOpen(false);
 addEventListener("keydown",e=>{ if(e.key==="Escape"){drawerOpen(false);menu(false);} });
@@ -454,8 +479,9 @@ $("#goCo").onclick=()=>$("#co").classList.add("on");
 $("#closeCo").onclick=()=>$("#co").classList.remove("on");
 $("#form").addEventListener("submit",e=>{
   e.preventDefault();
-  const f=new FormData(e.target), t=money(total());
-  $("#coBody").innerHTML=`<div class="done"><svg class="chk" viewBox="0 0 80 80"><circle cx="40" cy="40" r="34"/><path d="M26 41l10 10 19-21"/></svg><h3>Thank you, ${esc(f.get("n")).replace(/</g,"&lt;")}</h3><p>Your ${f.get("t").toLowerCase()} order of ${t} has been received. We will contact you on ${esc(f.get("p")).replace(/</g,"&lt;")} to confirm.</p><button class="btn" style="margin-top:28px" onclick="drawerOpen(false)">BACK TO MENU</button></div>`;
+  const f=new FormData(e.target), t=money(total()), oid=newOrderId();
+  notifyPushover({id:oid,name:f.get("n"),phone:f.get("p"),total:total(),pay:f.get("pay")});
+  $("#form").style.display="none"; $("#coBody").insertAdjacentHTML("beforeend",`<div class="done" id="doneBox"><svg class="chk" viewBox="0 0 80 80"><circle cx="40" cy="40" r="34"/><path d="M26 41l10 10 19-21"/></svg><h3>Thank you, ${esc(f.get("n")).replace(/</g,"&lt;")}</h3><p>Your ${f.get("t").toLowerCase()} order ${oid} of ${t} has been received. We will contact you on ${esc(f.get("p")).replace(/</g,"&lt;")} to confirm.</p><button class="btn" style="margin-top:28px" onclick="drawerOpen(false)">BACK TO MENU</button></div>`);
   cart=[]; render();
 });
 render();
