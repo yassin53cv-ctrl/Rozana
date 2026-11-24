@@ -301,7 +301,7 @@ footer .top{grid-template-columns:1fr;gap:34px}
 
 <section class="about" id="about">
 <div class="wrap">
-<div class="pic rv"><div class="imgrv"><img src="./baked-pasta.jpg" alt="Baked pasta, bubbling from the oven" loading="lazy"></div></div>
+<div class="pic rv"><div class="imgrv"><img src="./baked-pasta.jpg" alt="Baked pasta, bubbling from the oven"></div></div>
 <div class="rv" style="--d:.15s">
 <h2>About Rozana</h2>
 <div class="orn" style="justify-content:flex-start;margin:0 0 22px"><i></i><b></b></div>
@@ -389,7 +389,7 @@ document.body.classList.add("lock");
 setTimeout(start, 2100);
 
 /* products */
-const card = p => `<article class="card rv"><div class="ph"><img src="${p.img}" alt="${esc(p.name)}" loading="lazy"></div><div class="bd"><h3>${esc(p.name)}</h3><p>${esc(p.desc)}</p><div class="row"><span class="price" data-price="${p.id}">${money(p.price)}</span><button class="add" data-id="${p.id}">ADD TO CART</button></div></div></article>`;
+const card = p => `<article class="card rv"><div class="ph"><img src="${p.img}" alt="${esc(p.name)}"></div><div class="bd"><h3>${esc(p.name)}</h3><p>${esc(p.desc)}</p><div class="row"><span class="price" data-price="${p.id}">${money(p.price)}</span><button class="add" data-id="${p.id}">ADD TO CART</button></div></div></article>`;
 const find = id => ALL.find(p=>p.id===id);
 $("#featGrid").innerHTML = FEATURED.map(id=>card(find(id))).join("");
 $("#p-restaurant").innerHTML = MENU.restaurant.map(card).join("");
@@ -459,6 +459,16 @@ $("#form").addEventListener("submit",e=>{
   cart=[]; render();
 });
 render();
+
+/* image safety net: if a path fails, retry common variants once */
+function imgFix(e){
+  const im=e.target; if(im.tagName!=="IMG"||im.dataset.t==="2") return;
+  const f=(im.getAttribute("src")||"").split("/").pop().replace(/\.jpg$/i,"");
+  const tries=[f+".jpg",f+".jpeg",f+".JPG",f+".png"], n=+(im.dataset.t||0);
+  if(n<tries.length && im.dataset.t!=="2"){ im.dataset.t=n+1; im.src=tries[n]; }
+}
+document.addEventListener("error",imgFix,true);
+if(!("IntersectionObserver" in window)) $$(".rv,.orn").forEach(el=>el.classList.add("in"));
 </script>
 </body>
 </html>
