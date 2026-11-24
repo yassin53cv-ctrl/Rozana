@@ -119,15 +119,15 @@ header.s{background:rgba(251,247,239,.92);backdrop-filter:blur(14px);padding:12p
 .tabs::after{content:"";position:absolute;bottom:0;left:50%;width:min(360px,90%);transform:translateX(-50%);height:1px;background:var(--beige);z-index:-1}
 [hidden]{display:none!important}
 .choose{display:grid;grid-template-columns:1fr 1fr;gap:26px;max-width:900px;margin:auto}
-.pick{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:54px 28px;background:#fff;border:1px solid var(--beige);position:relative;overflow:hidden;transition:transform .7s var(--ease),box-shadow .7s var(--ease),border-color .5s,opacity .9s var(--ease);transition-delay:var(--d,0s)}
-.pick::before{content:"";position:absolute;inset:0;background:var(--coffee);transform:translateY(101%);transition:transform .7s var(--ease)}
-.pick>*{position:relative}
-.pick:hover{transform:translateY(-8px);border-color:var(--gold);box-shadow:0 36px 60px -30px rgba(74,52,38,.4)}
-.pick:hover::before{transform:none}
-.pt{font-family:var(--serif);font-size:clamp(2rem,4vw,2.8rem);color:var(--coffee);transition:color .5s}
-.pd{color:var(--coffee2);max-width:260px;transition:color .5s}
-.pg{margin-top:14px;font-size:.76rem;letter-spacing:.2em;color:var(--gold)}
-.pick:hover .pt{color:var(--gold2)}.pick:hover .pd{color:#eadfc9}
+.pick{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;text-align:center;gap:8px;padding:34px 28px;min-height:clamp(380px,46vw,480px);background:var(--coffee);border:0;position:relative;overflow:hidden;isolation:isolate;color:#fff;transition:transform .7s var(--ease),box-shadow .7s var(--ease),opacity .9s var(--ease);transition-delay:var(--d,0s)}
+.pick>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform 1.4s var(--ease)}
+.pick::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(to top,rgba(46,32,24,.88),rgba(46,32,24,.1) 70%)}
+.pick::after{content:"";position:absolute;inset:14px;border:1px solid rgba(217,189,130,.55);transition:inset .6s var(--ease);pointer-events:none}
+.pick:hover{transform:translateY(-8px);box-shadow:0 36px 60px -30px rgba(74,52,38,.5)}
+.pick:hover>img{transform:scale(1.08)}.pick:hover::after{inset:24px}
+.pt{font-family:var(--serif);font-size:clamp(2rem,4vw,2.8rem);color:#fff}
+.pd{color:#eadfc9;max-width:260px}
+.pg{margin-top:12px;font-size:.76rem;letter-spacing:.2em;color:var(--gold2)}
 .back2{display:block;margin:0 auto 22px;font-size:.76rem;letter-spacing:.16em;color:var(--coffee2);padding:8px 4px;border-bottom:1px solid transparent;transition:color .3s,border-color .3s}
 .back2:hover{color:var(--coffee);border-color:var(--gold)}
 .pane:not(.on){display:none}.pane.on{display:grid;animation:pane .9s var(--ease)}
@@ -329,8 +329,8 @@ footer .top{grid-template-columns:1fr;gap:34px}
 <div class="wrap">
 <div class="sec-head rv"><h2>The Rozana Menu</h2><p>Choose a collection to see the menu. Your order is saved as you browse.</p><div class="orn"><i></i><b></b><i></i></div></div>
 <div class="choose" id="choose">
-<button class="pick rv" data-tab="cafe"><span class="pt">Café</span><span class="pd">Frappés, mojitos, lemonades and sweet treats.</span><span class="pg">VIEW CAFÉ MENU</span></button>
-<button class="pick rv" style="--d:.12s" data-tab="restaurant"><span class="pt">Restaurant</span><span class="pd">Grills, pizza, pasta and comfort plates.</span><span class="pg">VIEW RESTAURANT MENU</span></button>
+<button class="pick rv" data-tab="cafe"><img src="./blue-mojito.jpg" alt="Café drinks"><span class="pt">Café</span><span class="pd">Frappés, mojitos, lemonades and sweet treats.</span><span class="pg">VIEW CAFÉ MENU</span></button>
+<button class="pick rv" style="--d:.12s" data-tab="restaurant"><img src="./chicken-skewers.jpg" alt="Restaurant grills"><span class="pt">Restaurant</span><span class="pd">Grills, pizza, pasta and comfort plates.</span><span class="pg">VIEW RESTAURANT MENU</span></button>
 </div>
 <div id="browse" hidden>
 <button class="back2" id="backAll">← ALL COLLECTIONS</button>
