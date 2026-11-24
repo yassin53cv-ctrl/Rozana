@@ -266,8 +266,8 @@ footer .top{grid-template-columns:1fr;gap:34px}
 <div class="ctas fade d3"><a href="#menu" class="btn solid">ORDER NOW</a><a href="#collections" class="btn">EXPLORE COLLECTIONS</a></div>
 </div>
 <div class="stage" aria-hidden="true">
-<div class="arch a float"><img src="assets/images/restaurant/rozana-pizza.jpg" alt=""></div>
-<div class="arch b float"><img src="assets/images/restaurant/grilled-kofta.jpg" alt=""></div>
+<div class="arch a float"><img src="./rozana-pizza.jpg" alt=""></div>
+<div class="arch b float"><img src="./grilled-kofta.jpg" alt=""></div>
 </div>
 </div>
 <div class="scroll"></div>
@@ -277,8 +277,8 @@ footer .top{grid-template-columns:1fr;gap:34px}
 <div class="wrap">
 <div class="sec-head rv"><h2>Two Ways to Savour Rozana</h2><div class="orn"><i></i><b></b><i></i></div></div>
 <div class="cols">
-<a href="#menu" class="col rv" data-tab="cafe"><img src="assets/images/cafe/oreo-frappe.jpg" alt="Oreo frappé from the ROZANA café"><div><h3>Discover Our Café</h3><p>Frappés, mojitos, lemonades and sweet treats.</p><span class="go-l">VIEW CAFÉ <i></i></span></div></a>
-<a href="#menu" class="col rv" style="--d:.15s" data-tab="restaurant"><img src="assets/images/restaurant/crispy-chicken.jpg" alt="Crispy chicken and fries from the ROZANA restaurant"><div><h3>Explore Our Restaurant</h3><p>Grills, pizza, pasta and comfort plates.</p><span class="go-l">VIEW RESTAURANT <i></i></span></div></a>
+<a href="#menu" class="col rv" data-tab="cafe"><img src="./oreo-frappe.jpg" alt="Oreo frappé from the ROZANA café"><div><h3>Discover Our Café</h3><p>Frappés, mojitos, lemonades and sweet treats.</p><span class="go-l">VIEW CAFÉ <i></i></span></div></a>
+<a href="#menu" class="col rv" style="--d:.15s" data-tab="restaurant"><img src="./crispy-chicken.jpg" alt="Crispy chicken and fries from the ROZANA restaurant"><div><h3>Explore Our Restaurant</h3><p>Grills, pizza, pasta and comfort plates.</p><span class="go-l">VIEW RESTAURANT <i></i></span></div></a>
 </div>
 </div>
 </section>
@@ -301,7 +301,7 @@ footer .top{grid-template-columns:1fr;gap:34px}
 
 <section class="about" id="about">
 <div class="wrap">
-<div class="pic rv"><div class="imgrv"><img src="assets/images/restaurant/baked-pasta.jpg" alt="Baked pasta, bubbling from the oven" loading="lazy"></div></div>
+<div class="pic rv"><div class="imgrv"><img src="./baked-pasta.jpg" alt="Baked pasta, bubbling from the oven" loading="lazy"></div></div>
 <div class="rv" style="--d:.15s">
 <h2>About Rozana</h2>
 <div class="orn" style="justify-content:flex-start;margin:0 0 22px"><i></i><b></b></div>
@@ -356,20 +356,20 @@ const CURRENCY = "EGP";
 // Prices below are PLACEHOLDERS. Replace each `price` with the real value.
 const MENU = {
   restaurant: [
-    {id:"r1", name:"Chicken Wrap",        img:"assets/images/restaurant/chicken-wrap.jpg",    price:100, desc:"Tender grilled chicken, crisp greens and a silky house sauce in a warm toasted wrap."},
-    {id:"r2", name:"Crispy Chicken & Fries", img:"assets/images/restaurant/crispy-chicken.jpg", price:100, desc:"Golden, crunchy chicken served over hot fries with a savoury dipping sauce."},
-    {id:"r3", name:"Grilled Kofta Skewers",  img:"assets/images/restaurant/grilled-kofta.jpg",  price:100, desc:"Spiced minced beef, flame-grilled on the skewer and served with fresh sides."},
-    {id:"r4", name:"Grilled Chicken Skewers",img:"assets/images/restaurant/chicken-skewers.jpg",price:100, desc:"Marinated chicken pieces, charred over the grill until juicy and tender."},
-    {id:"r5", name:"Baked Pasta",         img:"assets/images/restaurant/baked-pasta.jpg",     price:100, desc:"Pasta baked in a rich sauce under a bubbling golden layer of cheese."},
-    {id:"r6", name:"Rozana Pizza",        img:"assets/images/restaurant/rozana-pizza.jpg",    price:100, desc:"Our signature pizza on a hand-stretched base, baked hot and topped generously."}
+    {id:"r1", name:"Chicken Wrap",        img:"./chicken-wrap.jpg",    price:100, desc:"Tender grilled chicken, crisp greens and a silky house sauce in a warm toasted wrap."},
+    {id:"r2", name:"Crispy Chicken & Fries", img:"./crispy-chicken.jpg", price:100, desc:"Golden, crunchy chicken served over hot fries with a savoury dipping sauce."},
+    {id:"r3", name:"Grilled Kofta Skewers",  img:"./grilled-kofta.jpg",  price:100, desc:"Spiced minced beef, flame-grilled on the skewer and served with fresh sides."},
+    {id:"r4", name:"Grilled Chicken Skewers",img:"./chicken-skewers.jpg",price:100, desc:"Marinated chicken pieces, charred over the grill until juicy and tender."},
+    {id:"r5", name:"Baked Pasta",         img:"./baked-pasta.jpg",     price:100, desc:"Pasta baked in a rich sauce under a bubbling golden layer of cheese."},
+    {id:"r6", name:"Rozana Pizza",        img:"./rozana-pizza.jpg",    price:100, desc:"Our signature pizza on a hand-stretched base, baked hot and topped generously."}
   ],
   cafe: [
-    {id:"c1", name:"Oreo Waffle",       img:"assets/images/cafe/oreo-waffle.jpg",       price:100, desc:"A warm waffle finished with Oreo crumble and a sweet drizzle."},
-    {id:"c2", name:"Oreo Frappé",       img:"assets/images/cafe/oreo-frappe.jpg",       price:100, desc:"Creamy, iced and blended with cookies for a rich chocolate finish."},
-    {id:"c3", name:"Blue Mojito",       img:"assets/images/cafe/blue-mojito.jpg",       price:100, desc:"A cool, sparkling mojito with fresh mint and a bright blue colour."},
-    {id:"c4", name:"Blueberry Frappé",  img:"assets/images/cafe/blueberry-frappe.jpg",  price:100, desc:"Smooth blended blueberry, served ice-cold."},
-    {id:"c5", name:"Strawberry Frappé", img:"assets/images/cafe/strawberry-frappe.jpg", price:100, desc:"Sweet strawberry blended with ice into a creamy, refreshing drink."},
-    {id:"c6", name:"Berry Lemonade",    img:"assets/images/cafe/berry-lemonade.jpg",    price:100, desc:"Fresh lemonade with a berry twist, served over ice."}
+    {id:"c1", name:"Oreo Waffle",       img:"./oreo-waffle.jpg",       price:100, desc:"A warm waffle finished with Oreo crumble and a sweet drizzle."},
+    {id:"c2", name:"Oreo Frappé",       img:"./oreo-frappe.jpg",       price:100, desc:"Creamy, iced and blended with cookies for a rich chocolate finish."},
+    {id:"c3", name:"Blue Mojito",       img:"./blue-mojito.jpg",       price:100, desc:"A cool, sparkling mojito with fresh mint and a bright blue colour."},
+    {id:"c4", name:"Blueberry Frappé",  img:"./blueberry-frappe.jpg",  price:100, desc:"Smooth blended blueberry, served ice-cold."},
+    {id:"c5", name:"Strawberry Frappé", img:"./strawberry-frappe.jpg", price:100, desc:"Sweet strawberry blended with ice into a creamy, refreshing drink."},
+    {id:"c6", name:"Berry Lemonade",    img:"./berry-lemonade.jpg",    price:100, desc:"Fresh lemonade with a berry twist, served over ice."}
   ]
 };
 const FEATURED = ["r6","r3","r1"];
