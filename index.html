@@ -105,7 +105,8 @@ header.s{background:rgba(251,247,239,.92);backdrop-filter:blur(14px);padding:12p
 .col:hover .go-l i{width:60px}
 
 /* reveal */
-.rv{opacity:0;transform:translateY(40px);transition:opacity 1.1s var(--ease),transform 1.1s var(--ease);transition-delay:var(--d,0s)}
+.rv{opacity:0;transform:translateY(46px);transition:opacity .9s var(--ease),transform 1s var(--ease);transition-delay:var(--d,0s);will-change:opacity,transform}
+.rv.l{transform:translateX(-70px)}.rv.r{transform:translateX(70px)}.rv.z{transform:translateY(40px) scale(.9)}
 .rv.in{opacity:1;transform:none}
 .imgrv{clip-path:inset(0 0 100% 0);transition:clip-path 1.4s var(--ease)}
 .in .imgrv,.imgrv.in{clip-path:inset(0)}
@@ -116,10 +117,23 @@ header.s{background:rgba(251,247,239,.92);backdrop-filter:blur(14px);padding:12p
 .tab.on{color:var(--coffee)}
 .tabs .ind{position:absolute;bottom:0;height:2px;background:var(--gold);transition:left .6s var(--ease),width .6s var(--ease)}
 .tabs::after{content:"";position:absolute;bottom:0;left:50%;width:min(360px,90%);transform:translateX(-50%);height:1px;background:var(--beige);z-index:-1}
-.pane{display:none}.pane.on{display:block;animation:pane .9s var(--ease)}
+[hidden]{display:none!important}
+.choose{display:grid;grid-template-columns:1fr 1fr;gap:26px;max-width:900px;margin:auto}
+.pick{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:54px 28px;background:#fff;border:1px solid var(--beige);position:relative;overflow:hidden;transition:transform .7s var(--ease),box-shadow .7s var(--ease),border-color .5s,opacity .9s var(--ease);transition-delay:var(--d,0s)}
+.pick::before{content:"";position:absolute;inset:0;background:var(--coffee);transform:translateY(101%);transition:transform .7s var(--ease)}
+.pick>*{position:relative}
+.pick:hover{transform:translateY(-8px);border-color:var(--gold);box-shadow:0 36px 60px -30px rgba(74,52,38,.4)}
+.pick:hover::before{transform:none}
+.pt{font-family:var(--serif);font-size:clamp(2rem,4vw,2.8rem);color:var(--coffee);transition:color .5s}
+.pd{color:var(--coffee2);max-width:260px;transition:color .5s}
+.pg{margin-top:14px;font-size:.76rem;letter-spacing:.2em;color:var(--gold)}
+.pick:hover .pt{color:var(--gold2)}.pick:hover .pd{color:#eadfc9}
+.back2{display:block;margin:0 auto 22px;font-size:.76rem;letter-spacing:.16em;color:var(--coffee2);padding:8px 4px;border-bottom:1px solid transparent;transition:color .3s,border-color .3s}
+.back2:hover{color:var(--coffee);border-color:var(--gold)}
+.pane:not(.on){display:none}.pane.on{display:grid;animation:pane .9s var(--ease)}
 @keyframes pane{from{opacity:0;transform:translateY(30px)}}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
-.card{background:#fff;position:relative;display:flex;flex-direction:column;transition:transform .7s var(--ease),box-shadow .7s var(--ease),opacity 1s var(--ease)}
+.card{background:#fff;position:relative;display:flex;flex-direction:column;transition:transform .7s var(--ease),box-shadow .7s var(--ease),opacity .9s var(--ease);transition-delay:var(--d,0s)}
 .card:hover{transform:translateY(-10px);box-shadow:0 40px 60px -30px rgba(74,52,38,.35)}
 .card .ph{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--cream)}
 .card .ph img{width:100%;height:100%;object-fit:cover;transition:transform 1.3s var(--ease)}
@@ -171,16 +185,16 @@ footer li a:hover{color:#fff;padding-left:8px}
 .big{position:absolute;right:-2%;bottom:-.22em;font-family:var(--serif);font-size:clamp(6rem,20vw,16rem);letter-spacing:.1em;color:rgba(217,189,130,.07);pointer-events:none;line-height:1}
 
 /* cart */
-#ov{position:fixed;inset:0;background:rgba(46,32,24,.5);backdrop-filter:blur(3px);z-index:80;opacity:0;pointer-events:none;transition:opacity .6s}
+#ov{position:fixed;inset:0;background:rgba(46,32,24,.5);z-index:80;opacity:0;pointer-events:none;transition:opacity .25s linear}
 #ov.on{opacity:1;pointer-events:auto}
-#drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--ivory);z-index:90;transform:translateX(104%);transition:transform .8s var(--ease);display:flex;flex-direction:column;box-shadow:-30px 0 60px rgba(0,0,0,.2)}
-#drawer.on{transform:none}
+#drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--ivory);z-index:90;transform:translate3d(104%,0,0);transition:transform .32s cubic-bezier(.3,.9,.3,1);display:flex;flex-direction:column;box-shadow:-10px 0 30px rgba(0,0,0,.18);will-change:transform;contain:layout paint}
+#drawer.on{transform:translate3d(0,0,0)}
 .dh{display:flex;justify-content:space-between;align-items:center;padding:26px 28px;border-bottom:1px solid var(--beige)}
 .dh h3{font-size:2rem}
 .x{width:40px;height:40px;font-size:1.6rem;border-radius:50%;transition:transform .5s var(--ease),background .3s}
 .x:hover{transform:rotate(90deg);background:var(--cream)}
 .items{flex:1;overflow:auto;padding:10px 28px}
-.it{display:grid;grid-template-columns:78px 1fr auto;gap:14px;padding:18px 0;border-bottom:1px solid var(--beige);animation:itin .6s var(--ease)}
+.it{display:grid;grid-template-columns:78px 1fr auto;gap:14px;padding:18px 0;border-bottom:1px solid var(--beige);animation:itin .3s var(--ease)}
 @keyframes itin{from{opacity:0;transform:translateX(30px)}}
 .it img{width:78px;height:96px;object-fit:cover}
 .it h4{font-family:var(--serif);font-size:1.2rem;font-weight:600;color:var(--coffee);line-height:1.2}
@@ -196,7 +210,7 @@ footer li a:hover{color:#fff;padding-left:8px}
 .tr.t{font-family:var(--serif);font-size:1.6rem;color:var(--coffee);margin:12px 0 18px}
 .df .btn{width:100%}
 .df .btn[disabled]{opacity:.4;pointer-events:none}
-.co{position:absolute;inset:0;background:var(--ivory);transform:translateX(100%);transition:transform .7s var(--ease);display:flex;flex-direction:column;overflow:auto}
+.co{position:absolute;inset:0;background:var(--ivory);transform:translate3d(100%,0,0);transition:transform .3s cubic-bezier(.3,.9,.3,1);display:flex;flex-direction:column;overflow:auto;will-change:transform}
 .co.on{transform:none}
 .co form{padding:10px 28px 30px;display:grid;gap:14px}
 .co label{font-size:.78rem;letter-spacing:.1em;color:var(--coffee2);display:grid;gap:6px}
@@ -209,6 +223,34 @@ footer li a:hover{color:#fff;padding-left:8px}
 .chk circle,.chk path{stroke-dasharray:200;stroke-dashoffset:200;animation:dr 1.2s var(--ease) forwards}
 .chk path{animation-delay:.5s}
 @keyframes dr{to{stroke-dashoffset:0}}
+
+
+/* extra motion */
+body.lock .float,body.lock .ring,body.lock .lmark,body.lock .mqi{animation-play-state:paused}
+#prog{position:fixed;top:0;left:0;right:0;height:3px;z-index:60;background:linear-gradient(90deg,var(--gold),var(--gold2));transform:scaleX(0);transform-origin:left}
+.links a.l.act{color:var(--gold)}.links a.l.act::after{transform:scaleX(1);transform-origin:left}
+.wd{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.14em;margin-bottom:-.14em}
+.wd>span{display:inline-block;transform:translateY(115%) rotate(4deg);transition:transform 1s var(--ease);transition-delay:calc(var(--i)*.09s + var(--d,0s))}
+.in .wd>span{transform:none}
+.mq{overflow:hidden;background:var(--coffee);color:var(--gold2);padding:18px 0;border-block:1px solid rgba(217,189,130,.4)}
+.mqi{display:flex;width:max-content;animation:mq 28s linear infinite}
+.mqi span{font-family:var(--serif);font-size:1.5rem;letter-spacing:.2em;white-space:nowrap;padding:0 28px;display:inline-flex;align-items:center;gap:56px}
+.mqi span::after{content:"";width:8px;height:8px;background:var(--gold);transform:rotate(45deg)}
+@keyframes mq{to{transform:translateX(-50%)}}
+.card .ph img{transform:scale(1.2)}
+.card.in .ph img{transform:scale(1);transition-duration:1.8s}
+.card.in:hover .ph img{transform:scale(1.09);transition-duration:1.3s}
+.card .price{display:inline-block;transition:transform .5s var(--ease)}.card:hover .price{transform:scale(1.08)}
+.vals div{transition:transform .5s var(--ease),border-color .4s}.vals div:hover{transform:translateY(-6px);border-color:var(--coffee)}
+.logo{transition:letter-spacing .6s var(--ease)}.logo:hover{letter-spacing:.36em}
+.sec-head .orn b{animation:pulse 3.2s ease-in-out infinite}
+@keyframes pulse{50%{transform:rotate(225deg) scale(1.3)}}
+.dot{position:absolute;width:10px;height:10px;background:var(--gold2);transform:rotate(45deg);opacity:.5;animation:fl 6s ease-in-out infinite;pointer-events:none}
+.rip{position:absolute;border-radius:50%;background:rgba(184,148,79,.4);transform:scale(0);animation:rip .6s ease-out forwards;pointer-events:none;z-index:2}
+@keyframes rip{to{transform:scale(1);opacity:0}}
+.hero .stage{will-change:transform}
+.lsub{transition:letter-spacing 1s var(--ease)}.lcard:hover .lsub{letter-spacing:.55em}
+.q button:active,.add:active,.btn:active{transform:scale(.95)}
 
 /* responsive */
 @media(max-width:980px){
@@ -225,7 +267,7 @@ footer li a:hover{color:#fff;padding-left:8px}
 header.s{backdrop-filter:none}
 }
 @media(max-width:700px){
-.cols{grid-template-columns:1fr}
+.cols,.choose{grid-template-columns:1fr}
 .grid{grid-template-columns:1fr;max-width:420px;margin:auto}
 footer .top{grid-template-columns:1fr;gap:34px}
 .col{padding:26px}
@@ -270,7 +312,10 @@ footer .top{grid-template-columns:1fr;gap:34px}
 <div class="scroll"></div>
 </section>
 
+<div class="mq" aria-hidden="true"><div class="mqi"><span>FRESH EVERY DAY</span><span>COOKED TO ORDER</span><span>CAFÉ &amp; RESTAURANT</span><span>A TASTE OF SOMETHING SPECIAL</span><span>FRESH EVERY DAY</span><span>COOKED TO ORDER</span><span>CAFÉ &amp; RESTAURANT</span><span>A TASTE OF SOMETHING SPECIAL</span></div></div>
+
 <section id="collections">
+<i class="dot" style="top:70px;left:6%"></i><i class="dot" style="top:150px;right:8%;animation-delay:-2s"></i>
 <div class="wrap">
 <div class="sec-head rv"><h2>Two Ways to Savour Rozana</h2><div class="orn"><i></i><b></b><i></i></div></div>
 <div class="cols">
@@ -280,23 +325,24 @@ footer .top{grid-template-columns:1fr;gap:34px}
 </div>
 </section>
 
-<section class="feat" id="featured">
-<div class="wrap">
-<div class="sec-head rv"><h2>Featured from the Kitchen</h2><p>Three plates our guests come back for.</p><div class="orn"><i></i><b></b><i></i></div></div>
-<div class="grid" id="featGrid"></div>
-</div>
-</section>
-
 <section id="menu">
 <div class="wrap">
-<div class="sec-head rv"><h2>The Rozana Menu</h2><p>Choose a collection, add your favourites, and check out in seconds.</p><div class="orn"><i></i><b></b><i></i></div></div>
-<div class="tabs rv" id="tabs" role="tablist"><button class="tab on" role="tab" data-tab="restaurant">RESTAURANT</button><button class="tab" role="tab" data-tab="cafe">CAFÉ</button><span class="ind"></span></div>
-<div class="pane on grid" id="p-restaurant"></div>
+<div class="sec-head rv"><h2>The Rozana Menu</h2><p>Choose a collection to see the menu. Your order is saved as you browse.</p><div class="orn"><i></i><b></b><i></i></div></div>
+<div class="choose" id="choose">
+<button class="pick rv" data-tab="cafe"><span class="pt">Café</span><span class="pd">Frappés, mojitos, lemonades and sweet treats.</span><span class="pg">VIEW CAFÉ MENU</span></button>
+<button class="pick rv" style="--d:.12s" data-tab="restaurant"><span class="pt">Restaurant</span><span class="pd">Grills, pizza, pasta and comfort plates.</span><span class="pg">VIEW RESTAURANT MENU</span></button>
+</div>
+<div id="browse" hidden>
+<button class="back2" id="backAll">← ALL COLLECTIONS</button>
+<div class="tabs" id="tabs" role="tablist"><button class="tab" role="tab" data-tab="restaurant">RESTAURANT</button><button class="tab" role="tab" data-tab="cafe">CAFÉ</button><span class="ind"></span></div>
+<div class="pane grid" id="p-restaurant"></div>
 <div class="pane grid" id="p-cafe"></div>
+</div>
 </div>
 </section>
 
 <section class="about" id="about">
+<i class="dot" style="top:80px;right:7%"></i><i class="dot" style="bottom:90px;left:5%;animation-delay:-3s"></i>
 <div class="wrap">
 <div class="pic rv"><div class="imgrv"><div class="lcard" role="img" aria-label="ROZANA Café &amp; Restaurant logo"><div class="lin"><svg class="lmark" viewBox="0 0 60 60" aria-hidden="true"><path d="M30 4l6 20 20 6-20 6-6 20-6-20-20-6 20-6z" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="30" cy="30" r="3" fill="currentColor"/></svg><div class="lname">ROZANA</div><div class="orn"><i></i><b></b><i></i></div><div class="lsub">CAFÉ &amp; RESTAURANT</div><div class="ltag">A Taste of Something Special</div></div></div></div></div>
 <div class="rv" style="--d:.15s">
@@ -324,6 +370,7 @@ footer .top{grid-template-columns:1fr;gap:34px}
 </div>
 </footer>
 
+<div id="prog"></div>
 <div id="ov"></div>
 <aside id="drawer" aria-label="Shopping cart" aria-hidden="true">
 <div class="dh"><h3>Your Order</h3><button class="x" id="closeCart" aria-label="Close cart">×</button></div>
@@ -371,7 +418,6 @@ const MENU = {
     {id:"c6", name:"Berry Lemonade",    img:"./berry-lemonade.jpg",    price:75, desc:"Fresh lemonade with a berry twist, served over ice."}
   ]
 };
-const FEATURED = ["r6","r3","r1"];
 /* ============================================= */
 
 /* ===== PUSHOVER (order notifications) ===== */
@@ -409,27 +455,43 @@ requestAnimationFrame(()=>requestAnimationFrame(()=>document.body.classList.add(
 /* products */
 const card = p => `<article class="card rv"><div class="ph"><img src="${p.img}" alt="${esc(p.name)}"></div><div class="bd"><h3>${esc(p.name)}</h3><p>${esc(p.desc)}</p><div class="row"><span class="price" data-price="${p.id}">${money(p.price)}</span><button class="add" data-id="${p.id}">ADD TO CART</button></div></div></article>`;
 const find = id => ALL.find(p=>p.id===id);
-$("#featGrid").innerHTML = FEATURED.map(id=>card(find(id))).join("");
 $("#p-restaurant").innerHTML = MENU.restaurant.map(card).join("");
 $("#p-cafe").innerHTML = MENU.cafe.map(card).join("");
 
 /* reveal */
-const io = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target);} }),{threshold:.12,rootMargin:"0px 0px -40px 0px"});
+const markIn = el => { el.classList.add("in"); setTimeout(()=>el.style.removeProperty("--d"),1800); };
+const io = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ markIn(e.target); io.unobserve(e.target);} }),{threshold:.1,rootMargin:"0px 0px -30px 0px"});
+$$(".sec-head h2,.about h2").forEach(h=>{ h.innerHTML=h.textContent.split(" ").map((w,i)=>`<span class="wd" style="--i:${i}"><span>${w}</span></span>`).join(" "); });
+const addRv=(sel,cls,step,base)=>$$(sel).forEach((el,i)=>{ el.classList.add("rv"); if(cls) el.classList.add(...cls.split(" ")); if(step) el.style.setProperty("--d",((base||0)+i*step)+"s"); });
+addRv(".sec-head p","",0,.25);
+addRv(".about .rv > p","",.12,.3);
+addRv(".vals div","z",.15,.2);
+addRv("footer li","",.07,.1);
+addRv("footer h4","",0,0);
+addRv(".copy,.by","",0,.2);
+$$(".col").forEach((c,i)=>c.classList.add(i?"r":"l"));
+$$(".pick").forEach((c,i)=>c.classList.add(i?"r":"l"));
+$(".about .pic").classList.add("l"); $(".about .pic + .rv").classList.add("r");
+$$(".card").forEach(c=>c.classList.add("z"));
 const observe = r => $$(".rv,.orn",r).forEach((el,i)=>{ if(el.closest(".grid")&&!el.style.getPropertyValue("--d")) el.style.setProperty("--d",(i%3)*.12+"s"); io.observe(el); });
 observe(document);
 
-/* tabs */
+/* collection picker (nothing is shown until the customer chooses) */
 const ind = $(".tabs .ind");
 function setTab(name){
+  $("#choose").hidden=true; $("#browse").hidden=false;
   $$(".tab").forEach(t=>t.classList.toggle("on",t.dataset.tab===name));
   $$(".pane").forEach(p=>p.classList.toggle("on",p.id==="p-"+name));
-  $$("#p-"+name+" .rv").forEach(el=>el.classList.add("in"));
+  $$("#p-"+name+" .rv").forEach(markIn);
   const t=$(".tab.on"); ind.style.left=t.offsetLeft+"px"; ind.style.width=t.offsetWidth+"px";
 }
+function showChoose(){ $("#browse").hidden=true; $("#choose").hidden=false; $$(".pane").forEach(p=>p.classList.remove("on")); }
+function pick(name,scroll){ setTab(name); if(scroll) $("#menu").scrollIntoView({behavior:"smooth"}); }
 $$(".tab").forEach(t=>t.addEventListener("click",()=>setTab(t.dataset.tab)));
+$$(".pick").forEach(c=>c.addEventListener("click",()=>pick(c.dataset.tab,true)));
 $$(".col").forEach(c=>c.addEventListener("click",()=>setTab(c.dataset.tab)));
-addEventListener("resize",()=>setTab($(".tab.on").dataset.tab));
-setTimeout(()=>setTab("restaurant"),50);
+$("#backAll").addEventListener("click",()=>{ showChoose(); $("#menu").scrollIntoView({behavior:"smooth"}); });
+addEventListener("resize",()=>{ const o=$(".tab.on"); if(o&&!$("#browse").hidden) setTab(o.dataset.tab); });
 
 /* nav */
 const hd=$("#hd");
@@ -478,6 +540,27 @@ $("#form").addEventListener("submit",e=>{
   cart=[]; render();
 });
 render();
+
+/* scroll effects: progress bar, parallax, active nav link */
+const prog=$("#prog"), stage=$(".hero .stage"), big=$(".big"), secs=$$("#collections,#menu,#about,#contact"), navA=$$("#links a.l");
+let tick=false;
+function onScroll(){
+  tick=false; const y=scrollY, h=document.documentElement.scrollHeight-innerHeight;
+  prog.style.transform="scaleX("+(h>0?y/h:0)+")";
+  if(y<innerHeight*1.2){ stage.style.transform="translate3d(0,"+(y*.12)+"px,0)"; }
+  big.style.transform="translate3d("+(-(y/(h||1))*8)+"%,0,0)";
+  let cur=""; secs.forEach(sc=>{ if(sc.getBoundingClientRect().top<innerHeight*.4) cur="#"+sc.id; });
+  navA.forEach(a=>a.classList.toggle("act",a.getAttribute("href")===cur));
+}
+addEventListener("scroll",()=>{ if(!tick){ tick=true; requestAnimationFrame(onScroll); } },{passive:true});
+onScroll();
+document.addEventListener("pointerdown",e=>{
+  const b=e.target.closest(".btn,.add,.pick,.cartbtn"); if(!b) return;
+  const r=b.getBoundingClientRect(), d=Math.max(r.width,r.height)*2, sp=document.createElement("span");
+  sp.className="rip"; sp.style.cssText="width:"+d+"px;height:"+d+"px;left:"+(e.clientX-r.left-d/2)+"px;top:"+(e.clientY-r.top-d/2)+"px";
+  if(getComputedStyle(b).position==="static") b.style.position="relative";
+  b.style.overflow="hidden"; b.appendChild(sp); setTimeout(()=>sp.remove(),650);
+});
 
 /* image safety net: if a path fails, retry common variants once */
 function imgFix(e){
